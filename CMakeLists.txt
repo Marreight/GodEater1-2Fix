@@ -20,7 +20,7 @@
 # OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
 # SOFTWARE.
 
-cmake_minimum_required(VERSION 3.28)
+cmake_minimum_required(VERSION 3.5)
 
 # Variables
 set(PROJECT_NAME GodEater1-2Fix)
@@ -90,6 +90,12 @@ target_link_libraries(${PROJECT_NAME} PRIVATE
     spdlog::spdlog
     yaml-cpp
 )
+if(MINGW)
+    target_link_options(${PROJECT_NAME} PRIVATE
+        -static-libgcc
+        -static-libstdc++
+    )
+endif()
 
 if(INSTALL_PATH_OK)
     install(CODE "
